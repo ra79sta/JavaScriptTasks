@@ -1,0 +1,68 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Task2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    
+</head>
+<body>
+    <div class="container">
+        <div class="gameDif">
+                <label class="radio-inline">
+                  <input type="radio" name="difficultie" id="easy" checked="checked">Easy
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="difficultie" id="medium">Medium
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="difficultie" id="hard">Hard
+                </label>
+        </div>
+        <button class="startGame" id="startingGame">Start</button>
+        <div class="num">
+            <span class="number" id="numberHolder">Wait!</span>
+        </div>
+        <input type="text" class="letterInput" id="leterCheck" placeholder="Input Letter"  maxlength = "1" required/>
+        <div class="score" id="res">
+            <p>Score</p>
+            <div class="hitIt">Hit:<sapn id="hit">0</sapn></div>
+            <div class="missIt">Miss:<span id="missed">0</span></div>
+            <div class="leftIt">Left:<span id="left">26</span></div>
+        </div>
+        <div class="tableLetters" id="letterHolders">
+                <div class='oneLetter' id="1">A (1)</div>
+                <div class='oneLetter' id="2">B (2)</div>
+                <div class='oneLetter' id="3">C (3)</div>
+                <div class='oneLetter' id="4">D (4)</div>
+                <div class='oneLetter' id="5">E (5)</div>
+                <div class='oneLetter' id="6">F (6)</div>
+                <div class='oneLetter' id="7">G (7)</div>
+                <div class='oneLetter' id="8">H (8)</div>
+                <div class='oneLetter' id="9">I (9)</div>
+                <div class='oneLetter' id="10">J (10)</div>
+                <div class='oneLetter' id="11">K (11)</div>
+                <div class='oneLetter' id="12">L (12)</div>
+                <div class='oneLetter' id="13">M (13)</div>
+                <div class='oneLetter' id="14">N (14)</div>
+                <div class='oneLetter' id="15">O (15)</div>
+                <div class='oneLetter' id="16">P (16)</div>
+                <div class='oneLetter' id="17">Q (17)</div>
+                <div class='oneLetter' id="18">R (18)</div>
+                <div class='oneLetter' id="19">S (19)</div>
+                <div class='oneLetter' id="20">T (20)</div>
+                <div class='oneLetter' id="21">U (21)</div>
+                <div class='oneLetter' id="22">V (22)</div>
+                <div class='oneLetter' id="23">W (23)</div>
+                <div class='oneLetter' id="24">X (24)</div>
+                <div class='oneLetter' id="25">Y (25)</div>
+                <div class='oneLetter' id="26">Z (26)</div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

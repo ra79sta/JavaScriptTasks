@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+.container {
+    text-align: center;
+    margin: auto;
+}
+
+.tableLetters {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+    color: #a9a8a8;
+}
+
+.tableLetters>div {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+.score {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    color:#a9a8a8;
+}
+.startGame {
+    background-color: blue;
+    color: antiquewhite;
+    margin-bottom: 20px;
+}
+
+.num {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.hitIt {
+    color:green;
+}
+.missIt {
+    color:red
+}
+.letterInput {
+    text-align: center;
+}
