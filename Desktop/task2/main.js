@@ -67,6 +67,7 @@ function reset() {
     window.clearInterval(numShower);
     window.clearInterval(giveNum);
     changeColor();
+    letterVal.value = "";
     document.getElementById("hit").innerHTML = hit;
     document.getElementById("missed").innerHTML = missed;
     document.getElementById("left").innerHTML = left;
