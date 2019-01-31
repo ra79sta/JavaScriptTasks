@@ -21,6 +21,10 @@ let giveNum;
 start.addEventListener("click", startGame, false);
 
 function startGame() {
+    numToShow = undefined;
+    hit = 0;
+    missed = 0;
+    left = 26;
     start.innerHTML ="Stop"
     if(easy.checked){
         time = 5000;
@@ -35,7 +39,7 @@ function startGame() {
     play();
     let radio = document.getElementsByName("difficultie");
     let len = radio.length;
-    for(var j = 0; j < len; j++) {
+    for(let j = 0; j < len; j++) {
        radio[j].disabled = true;
     }
     inputLet();
@@ -51,11 +55,12 @@ function reset() {
      newExists = [];
      numsToShow = [];
      newLetter = "";
+     numToShow = undefined;
      time;
      i = 0;
      let radio = document.getElementsByName("difficultie");
      let len = radio.length;
-     for(var k = 0; k < len; k++) {
+     for(let k = 0; k < len; k++) {
        radio[k].disabled = false;
     }
     numberHolder.innerHTML = "Wait!"
@@ -96,7 +101,7 @@ function play(){
      numShower = setInterval (function () {
         numberHolder.innerHTML = newExists[i++];
         letterVal.focus();
-        if(letterVal.value == "") {
+        if(letterVal.value == "" || letterVal.value == null) {
             document.getElementById(numToShow).style.color = "red"
             missed ++;
             left --
