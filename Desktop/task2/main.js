@@ -102,7 +102,7 @@ function play(){
      numShower = setInterval (function () {
         numberHolder.innerHTML = newExists[i++];
         letterVal.focus();
-        if(letterVal.value == "" || letterVal.value == null) {
+        if(letterVal.value == "") {
             document.getElementById(numToShow).style.color = "red"
             missed ++;
             left --
