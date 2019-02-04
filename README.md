@@ -1,3 +1,2 @@
 # JavaScriptTasks
-# JavaScriptTasks
-# Tasks
+
