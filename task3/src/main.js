@@ -3,6 +3,7 @@ import App from './app'
 import router from '@router'
 import store from '@state/store'
 import '@components/_globals'
+import interceptorsSetup from './utils/interceptors.js'
 
 // Don't warn about using the dev version of Vue in development.
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
@@ -12,6 +13,8 @@ if (window.Cypress) {
   // Ensure tests fail when Vue emits an error.
   Vue.config.errorHandler = window.Cypress.cy.onUncaughtException
 }
+
+interceptorsSetup()
 
 const app = new Vue({
   router,

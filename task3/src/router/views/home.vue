@@ -1,6 +1,7 @@
 <script>
 import appConfig from '@src/app.config'
 import Layout from '@layouts/main'
+import axios from 'axios';
 
 export default {
   page: {
@@ -8,6 +9,13 @@ export default {
     meta: [{ name: 'description', content: appConfig.description }],
   },
   components: { Layout },
+  
+  mounted () {
+      axios
+          .get('https://jsonplaceholder.typicode.com/todos/1')
+          .then(response => (console.log(response.data)))
+          .catch(error => console.log(error))
+    }
 }
 </script>
 
