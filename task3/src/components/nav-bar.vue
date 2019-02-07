@@ -13,14 +13,22 @@ export default {
         },
       ],
       loggedInNavRoutes: [
-        {
-          name: 'profile',
-          title: () => 'Logged in as ' + this.currentUser.name,
-        },
+        // {
+        //   name: 'profile',
+        //   title: () => 'Logged in as ' + this.currentUser.name,
+        // },
         {
           name: 'logout',
           title: 'Log out',
         },
+        {
+          name: "new",
+          title:"New"
+        },
+        // {
+        //   name: "userForm",
+        //   title: "User Form"
+        // },
       ],
       loggedOutNavRoutes: [
         {
