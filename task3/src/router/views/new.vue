@@ -1,7 +1,7 @@
 <script>
 import Layout from '@layouts/main'
 import axios from 'axios'
-
+import Modal from '@components/modal.vue'
 
 export default {
   // page() {
@@ -15,10 +15,11 @@ export default {
   //     ],
   //   }
   // },
-  components: { Layout },
+  components: { Layout, Modal },
    data() {
     return {
-      users_list: {}
+      users_list: {},
+      selectedUser: '',
     }
 
  },
@@ -27,7 +28,12 @@ export default {
           .get('https://reqres.in/api/users')
           .then(response => (this.users_list = response.data))
           .catch(error => console.log(error))
+    },
+ methods: {
+      sendInfo(user) {
+      this.selectedUser = user;
     }
+  }
 }
 </script>
 
@@ -35,11 +41,12 @@ export default {
   <Layout>
     <div v-if="users_list.data">
        <ul id="list">
-      <li  v-for="user in users_list.data" :key="user.id">
-      <img :src="user.avatar"> {{ user.first_name }} {{ user.last_name }}
-  </li>
-</ul>
-</div>
+         <li  v-for="user in users_list.data" :key="user.id" v-b-modal.modalPrevent @click="sendInfo(user)">
+            <img :src="user.avatar"> {{ user.first_name }} {{ user.last_name }}
+        </li>
+      </ul>
+    </div>
+    <Modal v-bind:listOf="users_list" v-bind:thatUser="selectedUser"></Modal>
   </Layout>
 </template>
 
@@ -53,6 +60,9 @@ li>img {
   height: 40px;
   width: 40px;
   margin-top: 15px;
+}
+li {
+     list-style: none;
 }
 
 </style>

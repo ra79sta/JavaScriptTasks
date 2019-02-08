@@ -25,10 +25,10 @@ export default {
           name: "new",
           title:"New"
         },
-        // {
-        //   name: "userForm",
-        //   title: "User Form"
-        // },
+        {
+          name: "userForm",
+          title: "User Form"
+        },
       ],
       loggedOutNavRoutes: [
         {

@@ -9,6 +9,6 @@ components: { Layout },
 
 <template>
   <Layout>
-
+<h1>Helllo</h1>
   </Layout>
 </template>
