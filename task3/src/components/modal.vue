@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      imageData: null
+      imageData: '',
     }
   },
   methods: {
@@ -32,7 +32,8 @@ export default {
       },
 
     clearName () {
-      this.name = ''
+      this.name = '',
+      this.imageData = ''
     },
     handleOk (evt) {
       // Prevent modal from closing
@@ -70,7 +71,7 @@ export default {
       <form @submit.stop.prevent="handleSubmit">
         <b-form-input v-model="thatUser.first_name" type="text"></b-form-input>
         <b-form-input v-model="thatUser.last_name" type="text"></b-form-input>
-        <img :src="thatUser.avatar"/>
+        <img class="preview" :src="imageData || thatUser.avatar"/>
         <div><input type="file" accept="image/*" @change="previewImage" ></input></div>
 
      <!-- <div v-if="listOf.data">
@@ -85,3 +86,11 @@ export default {
 
   </div>
 </template>
+<<style lang="scss" module>
+@import '@design';
+
+img.preview {
+  width: 40px;
+  height: 40px;
+}
+</style>

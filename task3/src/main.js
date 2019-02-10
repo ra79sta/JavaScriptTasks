@@ -4,6 +4,12 @@ import router from '@router'
 import store from '@state/store'
 import '@components/_globals'
 // import interceptorsSetup from './utils/interceptors.js'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue);
+
 
 // Don't warn about using the dev version of Vue in development.
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
