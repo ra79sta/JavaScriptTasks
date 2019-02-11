@@ -2,6 +2,7 @@
 import Layout from '@layouts/main'
 import axios from 'axios'
 import Modal from '@components/modal.vue'
+import index from '@src/state/modules';
 
 export default {
   components: { Layout, Modal },
@@ -24,17 +25,23 @@ export default {
       sendInfo(user) {
       this.selectedUser = user;
     },
-      clickPage(currentPage){
+      clickPage(currentPage) {
          axios.get('https://reqres.in/api/users?page='+ this.currentPage)
         .then(response => (this.users_list = response.data))
         .catch(error => console.log(error))
-        }
+    },
+      deleteUser(id) {
+        axios.delete('https://reqres.in/api/users/'+ id)
+        .then(response => (this.users_list.data.splice(index, 1)))
+        .catch(error => console.log(error))
+      }
   }
 }
 </script>
 
 <template>
   <Layout>
+    <router-link to="/userForm">Input New User</router-link>
     <div v-if="users_list.data">
       <table>
         <thead>
@@ -43,16 +50,18 @@ export default {
             <th>Avatar</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Action</th>
+            <th>Edit User</th>
+            <th>Delete User</th>
           </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users_list.data" :key="user.id" v-b-modal.modalPrevent @click="sendInfo(user)">
+            <tr v-for="user in users_list.data" :key="user.id" >
                 <td>{{user.id}}</td>
                 <td><img :src="user.avatar"></td>
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
-                <td>X</td>
+                <td><button v-b-modal.modalPrevent @click="sendInfo(user)">Edit User</button></td>
+                <td><button @click="deleteUser(user.id)">Delete</button></td>
             </tr>
         </tbody>
       </table>
