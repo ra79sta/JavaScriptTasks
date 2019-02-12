@@ -1,22 +1,18 @@
 
 <script>
-// import Vue from 'vue'
-// import BootstrapVue from 'bootstrap-vue'
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import '@views/new.vue'
-
-// Vue.use(BootstrapVue);
+import axios from 'axios'
 
 export default {
   props:{
     listOf: {},
     thatUser: '',
-
+    pageOf: ''
   },
   data () {
     return {
       imageData: '',
+      listOfList: this.listOf,
+
     }
   },
   methods: {
@@ -30,31 +26,35 @@ export default {
           reader.readAsDataURL(pics.files[0]);
         }
       },
-
+    getData() {
+      axios
+      .get('https://reqres.in/api/users?page='+ this.pageOf)
+      .then(response => (this.listOfList = response.data))
+      .catch(error => console.log(error))
+    },
     clearName () {
-      this.name = '',
-      this.imageData = ''
+      this.imageData = this.thatUser.avatar
+
     },
     handleOk (evt) {
-      // Prevent modal from closing
-      evt.preventDefault()
-      if (!this.name) {
-        alert('Please enter your name')
-      } else {
         this.handleSubmit()
-      }
     },
     handleSubmit () {
-      this.names.push(this.name)
-      this.clearName()
-      this.$refs.modal.hide()
+
+      let data = {
+        first_name: this.thatUser.first_name,
+        last_name: this.thatUser.last_name,
+      }
+
+      // let formUpdate = new FormData();
+      // formUpdate.append('file', this.imageData, this.imageData.name);
+      axios.put('https://reqres.in/api/users/'+ this.thatUser.id, data)
+      .then(() => {this.getData()})
+      .catch(error => console.log(error))
+       this.$refs.modal.hide()
     }
   },
-  // computed: {
-  //   showNewImage: function () {
-  //     return this.imageData = thatUser.avatar
-  //   }
-  // }
+
 
 }
 </script>
@@ -68,29 +68,19 @@ export default {
              title="Submit users data"
              @ok="handleOk"
              @shown="clearName">
-      <form @submit.stop.prevent="handleSubmit">
+    <form @submit.stop.prevent="handleSubmit">
         <b-form-input v-model="thatUser.first_name" type="text"></b-form-input>
         <b-form-input v-model="thatUser.last_name" type="text"></b-form-input>
         <img class="preview" :src="imageData || thatUser.avatar"/>
         <div><input type="file" accept="image/*" @change="previewImage" ></input></div>
 
-     <!-- <div v-if="listOf.data">
-       <ul id="list">
-         <li  v-for="user in listOf.data" :key="user.id">
-            <img :src="user.avatar"> {{ user.first_name }} {{ user.last_name }}
-        </li>
-       </ul>
-    </div>-->
     </form>
     </b-modal>
-
   </div>
 </template>
-<<style lang="scss" module>
-@import '@design';
+<style>
 
-img.preview {
-  width: 40px;
-  height: 40px;
+ img.preview {
+  width: 80px;
 }
 </style>

@@ -1,6 +1,6 @@
 <script>
 import Layout from '@layouts/main'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
 components: { Layout },

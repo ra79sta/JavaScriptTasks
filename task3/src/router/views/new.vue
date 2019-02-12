@@ -12,13 +12,17 @@ export default {
       users_list: {},
       selectedUser: '',
       currentPage: 1,
+       sortKey: 'first_name',
+       reverse: false,
+       columns: ['id', 'first_name', 'last_name'],
     }
  },
 
   mounted () {
-      axios.get('https://reqres.in/api/users')
-           .then(response => (this.users_list = response.data))
-           .catch(error => console.log(error))
+      axios
+      .get('https://reqres.in/api/users')
+      .then(response => (this.users_list = response.data))
+      .catch(error => console.log(error))
     },
 
   methods: {
@@ -32,7 +36,7 @@ export default {
     },
       deleteUser(id) {
         axios.delete('https://reqres.in/api/users/'+ id)
-        .then(response => (this.users_list.data.splice(index, 1)))
+        .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(currentPage)})
         .catch(error => console.log(error))
       }
   }
@@ -66,7 +70,7 @@ export default {
         </tbody>
       </table>
     </div>
-    <Modal v-bind:listOf="users_list" v-bind:thatUser="selectedUser"></Modal>
+    <Modal v-bind:listOf="users_list" v-bind:thatUser="selectedUser" v-bind:pageOf="currentPage"></Modal>
     <div>
     <b-pagination size="sm" :total-rows="users_list.total" v-model="currentPage" :per-page="users_list.per_page" @input="clickPage(currentPage)"></b-pagination>
   </div>
