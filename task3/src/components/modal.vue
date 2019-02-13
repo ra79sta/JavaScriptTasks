@@ -26,7 +26,7 @@ export default {
           reader.readAsDataURL(pics.files[0]);
         }
       },
-    getData() {
+    getUsers() {
       axios
       .get('https://reqres.in/api/users?page='+ this.pageOf)
       .then(response => (this.listOfList = response.data))
@@ -49,7 +49,7 @@ export default {
       // let formUpdate = new FormData();
       // formUpdate.append('file', this.imageData, this.imageData.name);
       axios.put('https://reqres.in/api/users/'+ this.thatUser.id, data)
-      .then(() => {this.getData()})
+      .then(() => {this.getUsers()})
       .catch(error => console.log(error))
        this.$refs.modal.hide()
     }

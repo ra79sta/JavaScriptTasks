@@ -12,20 +12,23 @@ export default {
       users_list: {},
       selectedUser: '',
       currentPage: 1,
-       sortKey: 'first_name',
-       reverse: false,
-       columns: ['id', 'first_name', 'last_name'],
     }
  },
 
-  mounted () {
-      axios
-      .get('https://reqres.in/api/users')
-      .then(response => (this.users_list = response.data))
-      .catch(error => console.log(error))
-    },
+  // mounted () {
+  //     axios
+  //     .get('https://reqres.in/api/users')
+  //     .then(response => (this.users_list = response.data))
+  //     .catch(error => console.log(error))
+  //   },
 
   methods: {
+      getUsers() {
+         axios
+         .get('https://reqres.in/api/users')
+         .then(response => (this.users_list = response.data))
+         .catch(error => console.log(error))
+    },
       sendInfo(user) {
       this.selectedUser = user;
     },
@@ -35,11 +38,14 @@ export default {
         .catch(error => console.log(error))
     },
       deleteUser(id) {
-        axios.delete('https://reqres.in/api/users/'+ id)
-        .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(currentPage)})
-        .catch(error => console.log(error))
+         axios.delete('https://reqres.in/api/users/'+ id)
+         .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(currentPage)})
+         .catch(error => console.log(error))
       }
-  }
+  },
+   created() {
+      this.getUsers();
+    },
 }
 </script>
 
@@ -59,7 +65,7 @@ export default {
           </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users_list.data" :key="user.id" >
+            <tr v-for="(user, index) in users_list.data" :key="index" >
                 <td>{{user.id}}</td>
                 <td><img :src="user.avatar"></td>
                 <td>{{ user.first_name }}</td>
