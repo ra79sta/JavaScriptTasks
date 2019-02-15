@@ -1,8 +1,10 @@
 
 <script>
 import axios from 'axios'
+import userMixin from '@src/mixins/userMixin.js'
 
 export default {
+  mixins: [userMixin],
   props:{
     listOf: {},
     thatUser: '',
@@ -12,7 +14,6 @@ export default {
     return {
       imageData: '',
       listOfList: this.listOf,
-
     }
   },
   methods: {
@@ -26,15 +27,8 @@ export default {
           reader.readAsDataURL(pics.files[0]);
         }
       },
-    getUsers() {
-      axios
-      .get('https://reqres.in/api/users?page='+ this.pageOf)
-      .then(response => (this.listOfList = response.data))
-      .catch(error => console.log(error))
-    },
     clearName () {
       this.imageData = this.thatUser.avatar
-
     },
     handleOk (evt) {
         this.handleSubmit()
@@ -49,7 +43,7 @@ export default {
       // let formUpdate = new FormData();
       // formUpdate.append('file', this.imageData, this.imageData.name);
       axios.put('https://reqres.in/api/users/'+ this.thatUser.id, data)
-      .then(() => {this.getUsers()})
+      .then(() => {this.clickPage(this.pageOf)})
       .catch(error => console.log(error))
        this.$refs.modal.hide()
     }

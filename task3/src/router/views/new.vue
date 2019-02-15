@@ -2,10 +2,12 @@
 import Layout from '@layouts/main'
 import axios from 'axios'
 import Modal from '@components/modal.vue'
-import index from '@src/state/modules';
+import index from '@src/state/modules'
+import userMixin from '@src/mixins/userMixin.js'
 
 export default {
   components: { Layout, Modal },
+  mixins: [userMixin],
 
    data() {
     return {
@@ -15,31 +17,13 @@ export default {
     }
  },
 
-  // mounted () {
-  //     axios
-  //     .get('https://reqres.in/api/users')
-  //     .then(response => (this.users_list = response.data))
-  //     .catch(error => console.log(error))
-  //   },
-
   methods: {
-      getUsers() {
-         axios
-         .get('https://reqres.in/api/users')
-         .then(response => (this.users_list = response.data))
-         .catch(error => console.log(error))
-    },
       sendInfo(user) {
       this.selectedUser = user;
     },
-      clickPage(currentPage) {
-         axios.get('https://reqres.in/api/users?page='+ this.currentPage)
-        .then(response => (this.users_list = response.data))
-        .catch(error => console.log(error))
-    },
       deleteUser(id) {
          axios.delete('https://reqres.in/api/users/'+ id)
-         .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(currentPage)})
+         .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(page)})
          .catch(error => console.log(error))
       }
   },
