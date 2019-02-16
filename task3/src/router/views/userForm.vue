@@ -1,12 +1,17 @@
 <script>
 import Layout from '@layouts/main'
 import axios from 'axios'
+import {mask} from 'vue-the-mask'
+import userMixin from '@src/mixins/userMixin.js'
 
 export default {
 components: { Layout },
+mixins: [userMixin],
+directives: {mask},
+
 data() {
   return {
-    max: 10,
+    max: 14,
   user: {
     firstName: '',
     lastName: '',
@@ -18,30 +23,37 @@ data() {
   },
   methods: {
 
+    postData(newUser) {
+      axios
+      .post('https://reqres.in/api/users/', newUser)
+      .then(() => {this.getUsers()})
+      .catch(error => console.log(error))
+    },
+
     onSubmit(e) {
     e.preventDefault()
     const allData = {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
-      phoneNumber: this.user.phoneNumber,
+      phoneNumber: this.user.phoneNumber.replace ( /[^0-9]/g, '' ),
       dateOfBirth: this.user.dateOfBirth
         };
-        // this.postData(allData)
+        this.postData(allData)
         this.initForm();
     },
 
     onReset(e) {
-    e.preventDefault();
-    this.initForm();
+      e.preventDefault();
+      this.initForm();
     },
 
-  initForm(){
-    this.user.firstName = '';
-    this.user.lastName = ''
-    this.user.email = '';
-    this.user.phoneNumber = '';
-    this.user.dateOfBirth = '';
+    initForm(){
+      this.user.firstName = '';
+      this.user.lastName = ''
+      this.user.email = '';
+      this.user.phoneNumber = '';
+      this.user.dateOfBirth = '';
     },
   }
 }
@@ -74,8 +86,8 @@ data() {
                 label="Email:"
                 label-for="form-email-input">
       <b-form-input id="form-email-input"
-                    type="email"
                     v-model="user.email"
+                    type="email"
                     required
                     placeholder="Enter email">
       </b-form-input>
@@ -84,9 +96,10 @@ data() {
                 label="Phone Number:"
                 label-for="form-phoneNumber-input">
       <b-form-input id="form-phoneNumber-input"
-                    type="text"
+                    type="tel"
                     v-model="user.phoneNumber"
                     :maxlength="max"
+                    v-mask="'(###) ###-####'"
                     required
                     placeholder="Enter Phone Number">
       </b-form-input>
