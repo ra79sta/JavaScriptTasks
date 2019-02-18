@@ -14,6 +14,7 @@ export default {
       users_list: {},
       selectedUser: '',
       currentPage: 1,
+      currentSortDir:'asc',
     }
  },
 
@@ -25,7 +26,17 @@ export default {
          axios.delete('https://reqres.in/api/users/'+ id)
          .then(response =>(this.users_list.data.splice(index, 1)))//.then(() => {this.clickPage(page)})
          .catch(error => console.log(error))
-      }
+      },
+      sortUsers() {
+          this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+          return this.users_list.data.sort((a,b) => {
+          let modifier = 1;
+          if(this.currentSortDir === 'desc') modifier = -1;
+          if(a.first_name < b.first_name) return -1 * modifier;
+          if(a.first_name > b.first_name) return 1 * modifier;
+          return 0;
+        });
+    }
   },
    created() {
       this.getUsers();
@@ -42,7 +53,7 @@ export default {
           <tr>
             <th>ID</th>
             <th>Avatar</th>
-            <th>First Name</th>
+            <th @click="sortUsers">First Name</th>
             <th>Last Name</th>
             <th>Edit User</th>
             <th>Delete User</th>
